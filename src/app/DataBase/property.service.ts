@@ -23,6 +23,13 @@ export class PropertyService {
       return this.http.post(this.baseURL,prop);
   }
   getProperty(){
-    
+    return this.http.get(this.baseURL);
   }
+  editPropert(prop:Property){
+    return this.http.put(this.baseURL+'/${prop._id}', prop);
+  }
+  deleteProperty(prop : Property){
+      return this.http.delete(this.baseURL+'/'+prop._id);
+  }
+
 }

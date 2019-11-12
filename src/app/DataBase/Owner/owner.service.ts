@@ -22,6 +22,10 @@ export class OwnerService {
   postOwner(owner : Owner){
     console.log(owner);
     return this.http.post(this.baseURL,owner);
-}
+  }
+  getOwnerList(){
+    return this.http.get(this.baseURL);
+  }
+  
 
 }

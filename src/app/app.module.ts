@@ -1,3 +1,4 @@
+import { AllOwnersComponent } from './Owner/all-owners/all-owners.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -12,6 +13,7 @@ import { RegisterComponent } from './Authentication/register/register.component'
 import { LoginComponent } from './Authentication/login/login.component';
 import { AddPropertyComponent } from './Properties/add-property/add-property.component';
 import { AllPropertiesComponent } from './Properties/all-properties/all-properties.component';
+import { EditOwnerComponent } from './Owner/edit-owner/edit-owner.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AllPropertiesComponent } from './Properties/all-properties/all-properti
     RegisterComponent,
     LoginComponent,
     AddPropertyComponent,
-    AllPropertiesComponent
+    AllPropertiesComponent,
+    AllOwnersComponent,
+    EditOwnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { OwnerService } from './../../DataBase/Owner/owner.service';
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from '../../DataBase/property.service';
 import { NgForm } from '@angular/forms';
@@ -11,7 +12,8 @@ import { NgForm } from '@angular/forms';
 })
 export class AddPropertyComponent implements OnInit {
   propertyform : any;
-  constructor(private propertyService: PropertyService) { }
+  ownerform :any;
+  constructor(private propertyService: PropertyService,private ownerService:OwnerService) { }
 
   ngOnInit() {
     
@@ -28,12 +30,20 @@ export class AddPropertyComponent implements OnInit {
     area : form.value.area,
     rooms : form.value.rooms,
     floors : form.value.floors
-
     }
     console.log("Im here");
     this.propertyService.postProperty(this.propertyform).subscribe((res)=>{
       console.log("Added Successfully");
+    });
 
-    })
+    this.ownerform={
+      firstname : form.value.firstname,
+      lastname : form.value.lastname,
+      email : form.value.email,
+      cnic : form.value.cnic,
+    }
+    this.ownerService.postOwner(this.ownerform).subscribe((res)=>{
+      console.log("Owner Added Succfully");
+    });
   }
 }
