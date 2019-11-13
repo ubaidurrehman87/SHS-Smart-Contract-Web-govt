@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-// import { Property } from '../Owner/all-owners/all-owners.component';
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
