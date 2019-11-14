@@ -9,15 +9,15 @@ import { Owner } from '../../models/owner/owner.model';
 })
 export class AllOwnersComponent implements OnInit {
 
-    
+  Owners : Owner;
   constructor(private OwnerApiService : OwnerApiService) {}
 
   ngOnInit() {
     this.refreshOwnerList();
   }
   refreshOwnerList(){
-      this.OwnerApiService.getOwnerList().subscribe((res)=>{
-        this.OwnerApiService.owners = res as Owner[];
+      this.OwnerApiService.getOwnerList().subscribe((data : Owner)=>{
+        this.Owners = data;
       });
   }
   
