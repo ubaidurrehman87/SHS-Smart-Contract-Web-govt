@@ -1,0 +1,21 @@
+.custom-border{
+    border-radius: 16px;
+    font-size: .8rem;
+    // padding: 1.5rem 1rem;
+    height: 50px;
+}
+.btn-primary {
+    float: left;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+.btn-custom{
+    margin-top: 0px;
+    margin-left: 5px;
+}
+
+@media only  screen and (max-width : 990px) {
+    .btn-custom{
+        margin-top: 5px !important;
+    }
+} 

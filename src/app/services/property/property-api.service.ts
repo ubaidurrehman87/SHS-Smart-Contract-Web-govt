@@ -19,7 +19,6 @@ export class PropertyApiService {
   constructor(private http: HttpClient) { }
 
   postProperty(prop : Property){
-      console.log(prop);
       return this.http.post(this.baseURL,prop);
   }
   getProperty(){
