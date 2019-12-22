@@ -4,6 +4,7 @@ import { Validators, FormBuilder ,FormGroup } from '@angular/forms';
 import { OwnerApiService } from 'src/app/services/owner/onwer-api.service';
 import swal from 'sweetalert';
 
+
 @Component({
   selector: 'app-add-property',
   templateUrl: './add-property.component.html',
@@ -48,13 +49,14 @@ export class AddPropertyComponent implements OnInit {
         //On Successful Property Addition along with the Owner
         swal({
           title: "Are you sure?",
-          text: "You want to Add this property Along with the Specified Owner <b>"+ this.propertyData.value.firstName + " " + this.propertyData.value.lastName +  "</b>!",
+          text: "You want to Add this property Along with the Specified Owner "+ this.propertyData.value.firstName + " " + this.propertyData.value.lastName +  "!",
           icon: "warning",
-          dangerMode: true,
+          // buttons : true,
+          dangerMode: true
         })
-        .then((Sure) => {
+        .then((willDelete) => {
 
-          if (Sure) { 
+          if (willDelete) { 
             //Form Data Inertion
             
               this.ownerform={
@@ -92,6 +94,9 @@ export class AddPropertyComponent implements OnInit {
                 }
               });
               
+          }
+          else{
+            swal("Oops!");
           }
         });
     }

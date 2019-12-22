@@ -6,15 +6,18 @@ import { AddPropertyComponent } from './properties/add-property/add-property.com
 import { AllOwnersComponent } from './owner/all-owners/all-owners.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './auth/_guard/auth.guard';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 const routes: Routes = [
-  {path : 'add-Property', component : AddPropertyComponent ,pathMatch : 'full'},
-  {path : 'all-Properties',component : AllPropertiesComponent , pathMatch : 'full'},
-  {path : 'all-owners', component : AllOwnersComponent},
+  {path : 'add-Property', component : AddPropertyComponent ,pathMatch : 'full', canActivate : [AuthGuard]},
+  {path : 'all-Properties',component : AllPropertiesComponent , pathMatch : 'full', canActivate : [AuthGuard]},
+  {path : 'all-owners', component : AllOwnersComponent, canActivate : [AuthGuard]},
   {path : 'login', component : LoginComponent },
-  {path : '' , component: HomeComponent , pathMatch : 'full'},
-  {path : '**' , component : PagenotfoundComponent },
+  {path : 'register', component : RegisterComponent },
+  {path : '' , component: HomeComponent , pathMatch : 'full', canActivate : [AuthGuard]},
+  {path : '**' , component : PagenotfoundComponent , canActivate : [AuthGuard]},
 ];
 
 @NgModule({
