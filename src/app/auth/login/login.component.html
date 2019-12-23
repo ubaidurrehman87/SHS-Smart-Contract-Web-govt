@@ -13,16 +13,18 @@
 
   <!-- Custom fonts for this template-->
   <link href="././assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="././assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
-<body class="bg-gradient-primary">
+<body>
 
-  <div class="container">
+  <div *ngIf="!token" style="background: #207e49;" class="mt-5 container">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -33,28 +35,52 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6 d-none d-lg-block">
+                <img class="govtlogo" src="../../../assets/img/govtlogo.png" alt="">
+              </div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" [formGroup]="userData" (ngSubmit)="login()">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="email" formControlName="email" class="form-control form-control-user"
+                        id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                      </div>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" formControlName="password" class="form-control form-control-user"
+                        id="exampleInputPassword" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                          <div *ngIf="f.password.errors.required">Password is required</div>
+                          <div *ngIf="f.password.errors.minlength">Password must be 8 characters long!</div>
+                        </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
+                    </div> -->
+                    <div class="ml-5">
+                      <div class="ml-5">
+                        <img *ngIf="loggingIn" class="ml-5" src="../../../assets/img/loader.gif" height="50px" width="50px" alt="">
+                      </div>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                    <div *ngIf="notRegistered" class="alert alert-danger" role="alert">
+                        Sorry, You are not Registered!
+                      </div>
+                      <div *ngIf="incorrect" class="alert alert-danger" role="alert">
+                          Email OR Password is Incorrect!
+                        </div>
+                    <button type="submit" style="background: #207e49;color: white;" class="btn btn-user btn-block">
                       Login
-                    </a>
+                    </button>
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Login with Google
@@ -64,11 +90,11 @@
                     </a>
                   </form>
                   <hr>
-                  <div class="text-center">
+                  <!-- <div class="text-center">
                     <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
+                  </div> -->
                   <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
+                    <a class="small" routerLink="/register">Create an Account!</a>
                   </div>
                 </div>
               </div>

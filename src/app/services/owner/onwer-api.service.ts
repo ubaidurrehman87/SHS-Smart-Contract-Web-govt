@@ -20,7 +20,6 @@ export class OwnerApiService {
 
   
   postOwner(owner : Owner){
-    console.log(owner);
     return this.http.post(this.baseURL,owner);
   }
   getOwnerList(){
