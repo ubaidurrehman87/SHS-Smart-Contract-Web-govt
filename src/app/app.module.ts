@@ -18,6 +18,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { ApprovalComponent } from './models/approval/approval/approval.component';
 
 registerLocaleData(en);
 
@@ -32,7 +33,8 @@ registerLocaleData(en);
     PagenotfoundComponent,
     LoginComponent,
     RegisterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ApprovalComponent
     ],
   imports: [
     BrowserModule,
