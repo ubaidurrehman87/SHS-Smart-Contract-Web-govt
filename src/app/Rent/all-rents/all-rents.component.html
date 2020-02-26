@@ -1,0 +1,38 @@
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">All Properties</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>CNIC#</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr *ngIf ="rentService.rents == None" >
+                      <img  src="assets/gif/spaceman.gif">
+                    </tr>
+                    <tr *ngFor="let ren of rentService.rents">
+                      <td>{{rent.firstname}}</td>
+                      <td>{{rent.lastname}}</td>
+                      <td>{{rent.email}}</td>
+                      <td>{{rent.cnic}}</td>
+                      <td><button class="btn btn-danger btn-circle" style="margin-right : 5px" type="button" onClick=""><i class="fas fa-trash-alt fa-sm"></i></button> 
+                       <button class="btn btn-primary btn-circle" type="button" ><i class="fas fa-edit fa-sm"></i></button>
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
