@@ -18,17 +18,32 @@ export class PropertyApiService {
   readonly baseURL="http://localhost:3000/property"
   constructor(private http: HttpClient) { }
 
-  postProperty(prop : Property){
-      return this.http.post(this.baseURL,prop);
+  postProperty(property : Property){
+      return this.http.post(this.baseURL,{property});
   }
   getProperty(){
     return this.http.get(this.baseURL);
   }
-  editPropert(prop:Property){
-    return this.http.put(this.baseURL+'/${prop._id}', prop);
+  approveProperty(id:string){
+    let prop = {
+      approveStatus : 'approved'
+    }
+    return this.http.put(this.baseURL+'/approve/'+id,{ prop });
   }
+
+  disapproveProperty(id:string){
+    let prop = {
+      approveStatus : 'disapproved'
+    }
+    return this.http.put(this.baseURL+'/disapprove/'+id,{ prop });
+  }
+
   deleteProperty(prop : Property){
       return this.http.delete(this.baseURL+'/'+prop._id);
+  }
+
+  getOwnerByEmail(ownerEmail: any) {
+    return this.http.get("http://localhost:3000/owner/" + ownerEmail);
   }
 
 }

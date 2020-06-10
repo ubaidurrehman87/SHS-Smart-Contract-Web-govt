@@ -36,18 +36,18 @@
                             >
                               Address
                             </th> -->
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Full Name</th>
                             <th>Email Address</th>
                             <th>CNIC</th>
+                            <th>Address</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let Owner of Owners">
-                            <td>{{Owner.firstname}}</td>
-                            <td>{{Owner.lastname}}</td>
+                            <td>{{Owner.fullName}}</td>
                             <td>{{Owner.email}}</td>
                             <td>{{Owner.cnic}}</td>
+                            <td>{{Owner.address}}</td>
                           </tr>
                         </tbody>
                       </nz-table>
@@ -82,18 +82,18 @@
                                 >
                                   Address
                                 </th> -->
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Full Name</th>
                                 <th>Email Address</th>
                                 <th>CNIC</th>
+                                <th>Address</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr *ngFor="let Owner of Owners">
-                                <td>{{Owner.firstname}}</td>
-                                <td>{{Owner.lastname}}</td>
+                                <td>{{Owner.fullName}}</td>
                                 <td>{{Owner.email}}</td>
                                 <td>{{Owner.cnic}}</td>
+                                <td>{{Owner.address}}</td>
                               </tr>
                             </tbody>
                           </nz-table>

@@ -18,7 +18,11 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
-import { ApprovalComponent } from './models/approval/approval/approval.component';
+// import { ApprovalComponent } from './models/approval/approval/approval.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ApprovalPropertiesComponent } from './approval-properties/approval-properties.component';
+import { DisapproveListingComponent } from './properties/disapprove-listing/disapprove-listing.component';
+
 
 registerLocaleData(en);
 
@@ -34,7 +38,8 @@ registerLocaleData(en);
     LoginComponent,
     RegisterComponent,
     ChangePasswordComponent,
-    ApprovalComponent
+    ApprovalPropertiesComponent,
+    DisapproveListingComponent
     ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

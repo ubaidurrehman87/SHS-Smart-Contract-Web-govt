@@ -16,12 +16,14 @@ interface Data {
   [key: string]: any;
 }
 
+
 @Component({
-  selector: 'app-all-properties',
-  templateUrl: './all-properties.component.html',
-  styleUrls: ['./all-properties.component.scss']
+  selector: 'app-disapprove-listing',
+  templateUrl: './disapprove-listing.component.html',
+  styleUrls: ['./disapprove-listing.component.scss']
 })
-export class AllPropertiesComponent implements OnInit {
+export class DisapproveListingComponent implements OnInit {
+
   properties : Property[];
   sales : Property[]
   rentals : Property[]
@@ -39,10 +41,10 @@ export class AllPropertiesComponent implements OnInit {
   refreshPropertList(){
     this.PropertyApiService.getProperty().subscribe((data : Property[])=>{
       this.sales = data.filter((property : Property)=>{
-        return property.type == 'sales'
+        return property.type == 'sales' && property.approveStatus == "disapproved"
       })
       this.rentals = data.filter((property : Property)=>{
-        return property.type == 'rentals'
+        return property.type == 'rentals' && property.approveStatus == "disapproved"
       })
     })
   }
@@ -174,4 +176,5 @@ export class AllPropertiesComponent implements OnInit {
       this.toast.error("Something Went Wrong!")
     })
   }
+
 }

@@ -1,7 +1,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">All Properties</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Approval Properties</h6>
   </div>
   <div class="card-body">
     <nz-tabset>
@@ -41,8 +41,7 @@
               <th>City</th>
               <th>Rooms</th>
               <th>Floors</th>
-              <th>Owner Email</th>
-              <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -53,10 +52,24 @@
               <td>{{rental.city}}</td>
               <td>{{rental.rooms}}</td>
               <td>{{rental.floors}}</td>
-              <td>{{ rental.owner }}</td>
-              <td *ngIf="rental.approveStatus == 'pending'" class="pending">{{rental.approveStatus}}</td>
-              <td *ngIf="rental.approveStatus == 'approved'" class="approved">{{rental.approveStatus}}</td>
-              <td *ngIf="rental.approveStatus == 'disapproved'" class="disapproved">{{rental.approveStatus}}</td>
+              <td>
+                <button nz-button class="approve" nzType="success" (click)="approveProperty(rental._id)">Approve</button>
+                <div>
+                  <button nz-button nzType="danger" (click)="showModal(rental._id)">Disapprove</button>
+                  <nz-modal
+                  [(nzVisible)]="isVisible"
+                  nzTitle="DISAPPROVE"
+                  nzOkText="YES"
+                  nzCancelText="NO"
+                  (nzOnOk)="handleOk(rental._id)"
+                  (nzOnCancel)="handleCancel()"
+                >
+                  <p>Are you Sure? You want to disapprove this property?</p>
+                </nz-modal>
+                </div>
+                <!-- <button class="btn btn-success">Approve</button> -->
+                <!-- <button class="btn btn-danger">Disapprove</button> -->
+              </td>
             </tr>
           </tbody>
         </nz-table>
@@ -97,8 +110,7 @@
               <th>City</th>
               <th>Rooms</th>
               <th>Floors</th>
-              <th>Owner Email</th>
-              <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -109,10 +121,24 @@
                 <td >{{sale.city}}</td>
                 <td >{{sale.rooms}}</td>
                 <td >{{sale.floors}}</td>
-                <td>{{sale.owner}}</td>
-                <td *ngIf="sale.approveStatus == 'pending'" class="pending">{{sale.approveStatus}}</td>
-                <td *ngIf="sale.approveStatus == 'approved'" class="approved">{{sale.approveStatus}}</td>
-                <td *ngIf="sale.approveStatus == 'disapproved'" class="disapproved">{{sale.approveStatus}}</td>
+                <td >
+                  <button nz-button class="approve" nzType="success" (click)="approveProperty(sale._id)">Approve</button>
+                  <div>
+                    <button nz-button nzType="danger" (click)="showModal(sale._id)">Disapprove</button>
+                    <nz-modal
+                      [(nzVisible)]="isVisible"
+                      nzTitle="DISAPPROVE"
+                      nzOkText="YES"
+                      nzCancelText="NO"
+                      (nzOnOk)="handleOk(sale._id)"
+                      (nzOnCancel)="handleCancel()"
+                    >
+                      <p>Are you Sure? You want to disapprove this property?</p>
+                    </nz-modal>
+                  </div>
+                  <!-- <button class="btn btn-success">Approve</button>
+                  <button class="btn btn-danger">Disapprove</button> -->
+                </td>
             </tr>
           </tbody>
         </nz-table>

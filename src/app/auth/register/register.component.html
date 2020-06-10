@@ -45,19 +45,11 @@
                   </div>
                   <form class="user" [formGroup]="userData" (ngSubmit)="signUp()">
                     <div class="form-group">
-                      <input type="text" formControlName="fname" class="form-control form-control-user"
+                      <input type="text" formControlName="fullName" class="form-control form-control-user"
                         id="exampleInputEmail" aria-describedby="emailHelp" placeholder=" First Name"
-                        [ngClass]="{ 'is-invalid': submitted && f.fname.errors }">
-                      <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
-                        <div *ngIf="f.fname.errors.required">First Name is required</div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="text" formControlName="lname" class="form-control form-control-user"
-                        id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Last Name"
-                        [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
-                      <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
-                        <div *ngIf="f.lname.errors.required">Last Name is required</div>
+                        [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }">
+                      <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                        <div *ngIf="f.fullName.errors.required">First Name is required</div>
                       </div>
                     </div>
                     <div class="form-group">
@@ -75,15 +67,17 @@
                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
-                        <div *ngIf="f.password.errors.minlength">Password must be 8 characters long!</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be 6 characters long!</div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <input type="number" formControlName="cnic" class="form-control form-control-user"
-                        id="exampleInputPassword" placeholder="CNIC"
+                      <input type="text" formControlName="cnic" class="form-control form-control-user"
+                        id="exampleInputPassword" placeholder="CNIC" maxlength="14"
                         [ngClass]="{ 'is-invalid': submitted && f.cnic.errors }">
                       <div *ngIf="submitted && f.cnic.errors" class="invalid-feedback">
                         <div *ngIf="f.cnic.errors.required">CNIC is required</div>
+                        <div *ngIf="f.cnic.errors.minlength">CNIC must be 14 numbers long!</div>
+                        <div *ngIf="f.cnic.errors.pattern">CNIC pattern doesn't match!</div>
                       </div>
                     </div>
                     <div class="form-group">
@@ -118,6 +112,9 @@
                     </div>
                     <div *ngIf="duplicateEmail" class="alert alert-danger" role="alert">
                       You are already registered with this Account!
+                    </div>
+                    <div *ngIf="error" class="alert alert-danger" role="alert">
+                      Something Went Wrong!
                     </div>
                     <button type="submit" style="background: #207e49;color: white;" class="btn btn-user btn-block">
                       Sign Up

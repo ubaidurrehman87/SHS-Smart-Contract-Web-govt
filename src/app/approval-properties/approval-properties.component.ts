@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { Property } from '../../models/property/property.model';
 import { PropertyApiService } from 'src/app/services/property/property-api.service';
+import { Property } from '../models/property/property.model';
+import { HttpErrorResponse } from '@angular/common/http';
 import { NzModalService } from 'ng-zorro-antd';
 import { ToastrService } from 'ngx-toastr';
-import { HttpErrorResponse } from '@angular/common/http';
+
 
 interface Data {
   name: string;
@@ -16,12 +17,14 @@ interface Data {
   [key: string]: any;
 }
 
+
+
 @Component({
-  selector: 'app-all-properties',
-  templateUrl: './all-properties.component.html',
-  styleUrls: ['./all-properties.component.scss']
+  selector: 'app-approval-properties',
+  templateUrl: './approval-properties.component.html',
+  styleUrls: ['./approval-properties.component.scss']
 })
-export class AllPropertiesComponent implements OnInit {
+export class ApprovalPropertiesComponent implements OnInit {
   properties : Property[];
   sales : Property[]
   rentals : Property[]
@@ -39,10 +42,10 @@ export class AllPropertiesComponent implements OnInit {
   refreshPropertList(){
     this.PropertyApiService.getProperty().subscribe((data : Property[])=>{
       this.sales = data.filter((property : Property)=>{
-        return property.type == 'sales'
+        return property.type == 'sales' && property.approveStatus == "pending"
       })
       this.rentals = data.filter((property : Property)=>{
-        return property.type == 'rentals'
+        return property.type == 'rentals' && property.approveStatus == "pending"
       })
     })
   }

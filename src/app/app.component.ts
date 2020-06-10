@@ -10,8 +10,10 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 export class AppComponent {
   title = 'SHS-Smart-Contract-Web-govt';
   token : String;
+  username: string;
   constructor(){
     this.token = localStorage.getItem('token');
+    this.username = localStorage.getItem('name');
   }
   ngOnInit(){
 

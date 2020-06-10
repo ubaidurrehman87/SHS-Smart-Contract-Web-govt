@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder ,FormGroup } from '@angular/forms';
 import { AuthApiService } from 'src/app/services/auth/auth-api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,12 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private formBuilder : FormBuilder, private AuthApi : AuthApiService,private router : Router) { 
+  constructor(
+    private formBuilder : FormBuilder, 
+    private AuthApi : AuthApiService,
+    private router : Router,
+    private toast : ToastrService
+    ) { 
     this.token = localStorage.getItem('token');
    }
 
@@ -42,20 +48,24 @@ export class LoginComponent implements OnInit {
         return;
     }
     this.AuthApi.AuthenticateAgent(this.userData.value).subscribe((data : any) =>{
-      console.log(data);
       if(data.message == "Email or Password is incorrect"){
         this.loggingIn = false;
-        this.incorrect = true;
+        this.toast.error("Email or Password is incorrect")
       }
       else if(data.message == "NOT Registered"){
         this.loggingIn = false;
-        this.notRegistered = true;
+        this.toast.warning("You are not Registered!. Sign Up and Create a new Account!")
       }
       else{
         localStorage.setItem('token', data.token)
+        localStorage.setItem('name', data.name)
+        localStorage.setItem('email', data.email)
         location.reload();
       }
       
+    }, err => {
+      console.log(err)
+      this.loggingIn = false
     });
   }
 

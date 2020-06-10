@@ -17,15 +17,7 @@ export class AuthApiService {
 
   
   AuthenticateAgent(Agent : Agent){
-    // console.log(Agent.email);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'email' : btoa(Agent.email),
-        'password': btoa(Agent.password)
-      })
-    };
-    return this.http.get(this.baseURL,httpOptions);
+    return this.http.post(this.baseURL,{Agent});
   }
   getOwnerList(){
     return this.http.get(this.baseURL);

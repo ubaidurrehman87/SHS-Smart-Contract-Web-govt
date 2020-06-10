@@ -8,10 +8,14 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/_guard/auth.guard';
 import { RegisterComponent } from './auth/register/register.component';
+import { ApprovalPropertiesComponent } from './approval-properties/approval-properties.component';
+import { DisapproveListingComponent } from './properties/disapprove-listing/disapprove-listing.component';
 
 
 const routes: Routes = [
   {path : 'add-Property', component : AddPropertyComponent ,pathMatch : 'full', canActivate : [AuthGuard]},
+  {path : 'approval-properties', component : ApprovalPropertiesComponent ,pathMatch : 'full', canActivate : [AuthGuard]},
+  {path : 'disapproved-listing', component : DisapproveListingComponent ,pathMatch : 'full', canActivate : [AuthGuard]},
   {path : 'all-Properties',component : AllPropertiesComponent , pathMatch : 'full', canActivate : [AuthGuard]},
   {path : 'all-owners', component : AllOwnersComponent, canActivate : [AuthGuard]},
   {path : 'login', component : LoginComponent },

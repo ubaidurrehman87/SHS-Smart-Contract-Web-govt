@@ -12,52 +12,26 @@
         <div class="row">
 
           <div class="col-lg-12">
-            <div class="p-3">
+            <div>
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Owner Detail</h6>
               </div>
-
-              <form class="user" [formGroup]="propertyData" (ngSubmit)="onSubmit()">
-                <div class="p-3">
-                  <div class="form-row">
-                    <div class="form-group col-sm-6 mb-3 mb-sm-0 col-lg-6 col-xl-6">
-                      <input type="text" formControlName="firstName" class="form-control form-control-user"
-                        id="exampleFirstName" placeholder="First Name"
-                        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
-                      <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                      </div>
-                    </div>
-                    <div class="form-group col-sm-6 ">
-                      <input type="text" formControlName="lastName" class="form-control form-control-user"
-                        id="exampleFirstName" placeholder="Last Name"
-                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
-                      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                      </div>
-                    </div>
+              <form style="width: 90%; padding: 15px;" [formGroup]="searchOwner" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                  <input formControlName="ownerEmail" type="email" class="form-control bg-light border-0 small" placeholder="Search for owner's Email" aria-label="Search"
+                    aria-describedby="basic-addon2" [ngClass]="{ 'is-invalid': submitted_owner && g.ownerEmail.errors }">
+                  <div class="input-group-append">
+                    <button (click)="searchOwnerFunct()" class="btn btn-primary" type="button">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col-sm-6 mb-3 mb-sm-0 col-lg-6 col-xl-6">
-                      <input type="email" class="form-control form-control-user" id="exampleFirstName"
-                        formControlName="email" placeholder="Email Address"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                      </div>
-                    </div>
-                    <div class="form-group col-sm-6 ">
-                      <input type="number" class="form-control form-control-user" id="exampleFirstName"
-                        formControlName="cnic" placeholder="42501-0000000-0"
-                        [ngClass]="{ 'is-invalid': submitted && f.cnic.errors }">
-                      <div *ngIf="submitted && f.cnic.errors" class="invalid-feedback">
-                        <div *ngIf="f.cnic.errors.required">CNIC is required</div>
-                        <!-- <div *ngIf="f.cnic.errors.pattern">CNIC number must be a valid!</div> -->
-                      </div>
-                    </div>
+                  <div *ngIf="submitted_owner && g.ownerEmail.errors" class="invalid-feedback">
+                    <div *ngIf="g.ownerEmail.errors.required">Owner is required</div>
+                    <div *ngIf="g.ownerEmail.errors.email">Invalid Email</div>
                   </div>
                 </div>
+              </form>
+              <form class="user" [formGroup]="propertyData" (ngSubmit)="onSubmit()">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Property Detail</h6>
                 </div>
@@ -72,16 +46,11 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <select formControlName="state" class="form-control custom-border"
-                        [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
-                        <!-- <option value="State" selected>State</option> -->
-                        <option value="Sindh">Sindh</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Balochistan">Balochistan</option>
-                        <option value="KPK">KPK</option>
-                      </select>
-                      <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
-                        <div *ngIf="f.state.errors.required">State is required</div>
+                      <input type="text" formControlName="district" class="form-control form-control-user"
+                      id="exampleFirstName" placeholder="District"
+                      [ngClass]="{ 'is-invalid': submitted && f.district.errors }">
+                      <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
+                        <div *ngIf="f.district.errors.required">District is required</div>
                       </div>
                     </div>
 
@@ -96,19 +65,23 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
-                      <input type="text" formControlName="district" class="form-control form-control-user"
-                        id="exampleFirstName" placeholder="district"
-                        [ngClass]="{ 'is-invalid': submitted && f.district.errors }">
-                      <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
-                        <div *ngIf="f.district.errors.required">District is required</div>
+                      <select class="custom form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.type.errors }" formControlName="type" id="">
+                          <option selected disabled>Choose</option>
+                          <option value="sales">Sales</option>
+                          <option value="rentals">Rentals</option>
+                      </select>
+                      <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                        <div *ngIf="f.type.errors.required">Property Type is required</div>
                       </div>
                     </div>
                     <div class="col-sm-4  mb-3 mb-sm-0">
-                      <input type="number" formControlName="PostalCode" class="form-control form-control-user"
+                      <input type="number" formControlName="postalCode" class="form-control form-control-user"
                         id="exampleFirstName" placeholder="PostalCode"
-                        [ngClass]="{ 'is-invalid': submitted && f.PostalCode.errors }">
-                      <div *ngIf="submitted && f.PostalCode.errors" class="invalid-feedback">
-                        <div *ngIf="f.PostalCode.errors.required">PostalCode is required</div>
+                        [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }">
+                      <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                        <div *ngIf="f.postalCode.errors.required">PostalCode is required</div>
+                        <div *ngIf="f.postalCode.errors.required">PostalCode must be a number!</div>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -117,6 +90,7 @@
                         [ngClass]="{ 'is-invalid': submitted && f.houseNumber.errors }">
                       <div *ngIf="submitted && f.houseNumber.errors" class="invalid-feedback">
                         <div *ngIf="f.houseNumber.errors.required">House Number is required</div>
+                        <div *ngIf="f.houseNumber.errors.pattern">House Number must be a number!</div>
                       </div>
                     </div>
                   </div>
@@ -127,6 +101,7 @@
                         [ngClass]="{ 'is-invalid': submitted && f.area.errors }">
                       <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
                         <div *ngIf="f.area.errors.required">Area is required</div>
+                        <div *ngIf="f.area.errors.pattern">Area must be a number!</div>
                       </div>
                     </div>
                     <div class="col-sm-4  mb-3 mb-sm-0">
@@ -135,6 +110,7 @@
                         [ngClass]="{ 'is-invalid': submitted && f.floors.errors }">
                       <div *ngIf="submitted && f.floors.errors" class="invalid-feedback">
                         <div *ngIf="f.floors.errors.required">Floors field is required</div>
+                        <div *ngIf="f.floors.errors.pattern">Floors must be a number!</div>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -143,14 +119,13 @@
                         [ngClass]="{ 'is-invalid': submitted && f.rooms.errors }">
                       <div *ngIf="submitted && f.rooms.errors" class="invalid-feedback">
                         <div *ngIf="f.rooms.errors.required">Rooms field is required</div>
+                        <div *ngIf="f.rooms.errors.pattern">Rooms must be a number!</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-user btn-block col-lg-2"> <i class="fa fa-plus-circle"> </i> Add</button>
-                <button class="btn btn-primary btn-custom btn-user btn-block col-lg-2" type="reset" (click)="onReset()"> <i class="fas fa-undo"> </i> Reset All
-                  Fields</button>
+                <button nz-button nzType="primary" style="float: right;" [nzLoading]="isLoadingOne">Add Property!</button>
               </form>
               <hr style="margin-top: 80px;">
             </div>
